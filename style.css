@@ -18,11 +18,18 @@ body {
 }
 
 #brojevi div {
-    display: inline-block;
+    width: 40px; /* Fiksna širina */
+    height: 40px; /* Fiksna visina */
+    line-height: 40px; /* Centriranje teksta vertikalno */
+    display: inline-flex;
+    justify-content: center; /* Centriranje teksta horizontalno */
+    align-items: center;
     margin: 5px;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid black;
     cursor: pointer;
+    border-radius: 5px; /* Opcionalno, zaobljeni uglovi */
+    font-size: 16px; /* Opcionalno, prilagođavanje veličine fonta */
 }
 
 #brojevi .selected {
