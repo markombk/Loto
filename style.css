@@ -11,6 +11,10 @@ body {
     padding: 20px;
     margin: 20px auto;
     width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #brojevi div {
