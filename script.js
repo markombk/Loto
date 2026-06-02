@@ -8,9 +8,23 @@ document.addEventListener("DOMContentLoaded", function() {
     let izvuceniBrojevi = [];
     let brojPogodaka = 0;
 
+    function secureRandomInt(maxExclusive) {
+        const maxUint32 = 0x100000000;
+        const limit = maxUint32 - (maxUint32 % maxExclusive);
+        const randomValues = new Uint32Array(1);
+        let value;
+
+        do {
+            window.crypto.getRandomValues(randomValues);
+            value = randomValues[0];
+        } while (value >= limit);
+
+        return value % maxExclusive;
+    }
+
     function generisiBrojeve() {
         for (let i = 1; i <= 39; i++) {
-            let brojDiv = document.createElement('div');
+            const brojDiv = document.createElement('div');
             brojDiv.textContent = i;
             brojDiv.addEventListener('click', function() {
                 if (izabraniBrojevi.includes(i)) {
@@ -27,13 +41,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function izvuciBroj() {
         if (izvuceniBrojevi.length < 7) {
-            let broj = Math.floor(Math.random() * 39) + 1;
+            let broj = secureRandomInt(39) + 1;
             while (izvuceniBrojevi.includes(broj)) {
-                broj = Math.floor(Math.random() * 39) + 1;
+                broj = secureRandomInt(39) + 1;
             }
             izvuceniBrojevi.push(broj);
 
-            let brojDiv = document.createElement('div');
+            const brojDiv = document.createElement('div');
             brojDiv.textContent = broj;
             izvlacenjeDiv.appendChild(brojDiv);
 
@@ -43,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (izvuceniBrojevi.length === 7) {
                 rezultatDiv.textContent = 'Izvlačenje je završeno, imate ukupno ' + brojPogodaka + ' pogodaka';
-                novaIgraBtn.style.display = 'block';
+                novaIgraBtn.hidden = false;
             } else {
                 setTimeout(izvuciBroj, 3000); // čeka 3 sekunde pre nego što izvuče sledeći broj
             }
@@ -52,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     potvrdiIzborBtn.addEventListener('click', function() {
         if (izabraniBrojevi.length === 7) {
-            potvrdiIzborBtn.style.display = 'none';
+            potvrdiIzborBtn.hidden = true;
             izvuciBroj();
         } else {
             alert('Morate izabrati tačno 7 brojeva.');
@@ -63,27 +77,13 @@ document.addEventListener("DOMContentLoaded", function() {
         izabraniBrojevi = [];
         izvuceniBrojevi = [];
         brojPogodaka = 0;
-        brojeviDiv.innerHTML = '';
-        izvlacenjeDiv.innerHTML = '';
+        brojeviDiv.textContent = '';
+        izvlacenjeDiv.textContent = '';
         rezultatDiv.textContent = '';
         generisiBrojeve();
-        potvrdiIzborBtn.style.display = 'block';
-        novaIgraBtn.style.display = 'none';
+        potvrdiIzborBtn.hidden = false;
+        novaIgraBtn.hidden = true;
     });
 
     generisiBrojeve();
 });
-
-novaIgraBtn.addEventListener('click', function() {
-    izabraniBrojevi = [];
-    izvuceniBrojevi = [];
-    brojPogodaka = 0;
-    brojeviDiv.innerHTML = '';
-    izvlacenjeDiv.innerHTML = '';
-    rezultatDiv.textContent = '';
-    generisiBrojeve();
-    potvrdiIzborBtn.style.display = 'block';
-    novaIgraBtn.style.display = 'flex'; // Izmenjeno sa 'block' na 'flex'
-});
-
-// ... (ostatak koda je isti)
