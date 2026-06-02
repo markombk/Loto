@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="sr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://cdn.freelogovectors.net; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="no-referrer">
     <title>Loto Web Aplikacija</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -18,7 +22,7 @@
         <!-- Izvučeni brojevi će se prikazivati ovde -->
     </div>
     <div id="rezultat"></div>
-    <button id="novaIgra" style="display:none;">Igraj Ponovo</button>
+    <button id="novaIgra" hidden>Igraj Ponovo</button>
 
     <script src="script.js"></script>
 </body>
